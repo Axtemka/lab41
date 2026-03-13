@@ -4,15 +4,27 @@
  */
 package com.mycompany.lab1.data;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+
 /**
  *
  * @author temdo
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Technique {
+    @XmlElement
     private String name;
+    @XmlElement
     private String type;
+    @XmlElement
     private String owner;
+    @XmlElement
     private Integer damage;
+
+    public Technique(){}
 
     public Technique(String name, String type, String owner, Integer damage) {
         this.name = name;
@@ -20,6 +32,8 @@ public class Technique {
         this.owner = owner;
         this.damage = damage;
     }
+    
+    
 
     public String getName() {
         return name;
@@ -53,5 +67,10 @@ public class Technique {
         this.damage = damage;
     }
     
-    
+    public void info(){
+        System.out.println("----name: " + getName());
+        System.out.println("----type: " + getType());
+        System.out.println("----owner: " + getOwner());
+        System.out.println("----damage: " + getDamage());
+    }
 }
