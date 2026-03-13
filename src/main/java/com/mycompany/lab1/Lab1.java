@@ -17,13 +17,6 @@ import java.net.URI;
 public class Lab1 {
 
     public static void main(String[] args) {
-//       JsonReader j = new JsonReader();
-//        XmlReader x = new XmlReader();
-//        TextReader t = new TextReader();
-        
-//        Mission m = t.getMissionInfo("C:\\Users\\temdo\\Downloads\\Mission Data\\var2\\Mission B.txt");
-//        m.info();
-//        String property = System.getProperty("file.encoding");
-//        System.out.println(property);
+        FileManager fm = new FileManager();      
     }
 }

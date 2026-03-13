@@ -31,7 +31,6 @@ public class TextReader extends FileReader{
             
             String line = "";
            
-            
             int sorcerer_count = 0;
             int techniques_count = 0;
             
@@ -40,7 +39,7 @@ public class TextReader extends FileReader{
                if (line.contains(sorcerers_attributes[0])) sorcerer_count++;
                if (line.contains(techniques_attributes[0])) techniques_count++;
             }
-            br.close(); // Закрыли
+            br.close();
             
             Mission mission = new Mission();
             Curse curse = new Curse();
@@ -66,53 +65,58 @@ public class TextReader extends FileReader{
                 if (arr[0].contains(mission_attributes[0])){
                     mission.setMissionId(arr[1]);
                 }
-                if (arr[0].contains(mission_attributes[1])){
+                else if (arr[0].contains(mission_attributes[1])){
                     mission.setDate(arr[1]);
                 }
-                if (arr[0].contains(mission_attributes[2])){
+                else if (arr[0].contains(mission_attributes[2])){
                     mission.setLocation(arr[1]);
                 }
-                if (arr[0].contains(mission_attributes[3])){
+                else if (arr[0].contains(mission_attributes[3])){
                     mission.setOutcome(arr[1]);
                 }
-                if (arr[0].contains(mission_attributes[4])){
+                else if (arr[0].contains(mission_attributes[4])){
                     mission.setDamageCost(getNumberFromLine(arr[1]));
                 }
                 
                 //curse attributes checkout
-                if (arr[0].contains(curse_attributes[0])){
+                else if (arr[0].contains(curse_attributes[0])){
                     curse.setName(arr[1]);
                 }
-                if (arr[0].contains(curse_attributes[1])){
+                else if (arr[0].contains(curse_attributes[1])){
                     curse.setThreatLevel(arr[1]);
                 }
                 
                 //sorcerers attributes checkout
-                if (arr[0].contains(sorcerers_attributes[0]) && arr[0].contains(sorcerers_attributes[1])){
+                else if (arr[0].contains(sorcerers_attributes[0]) && arr[0].contains(sorcerers_attributes[1])){
                     int index = getNumberFromLine(arr[0]);
                     sorcerers.get(index).setName(arr[1]);
                 }
-                if (arr[0].contains(sorcerers_attributes[0]) && arr[0].contains(sorcerers_attributes[2])){
+                else if (arr[0].contains(sorcerers_attributes[0]) && arr[0].contains(sorcerers_attributes[2])){
                     int index = getNumberFromLine(arr[0]);
                     sorcerers.get(index).setRank(arr[1]);
                 }
                 
                 //techniques attributes checkout
-                if (arr[0].contains(techniques_attributes[0]) && arr[0].contains(techniques_attributes[1])){
+                else if (arr[0].contains(techniques_attributes[0]) && arr[0].contains(techniques_attributes[1])){
                     int index = getNumberFromLine(arr[0]);
                     techniques.get(index).setName(arr[1]);
                 }
-                if (arr[0].contains(techniques_attributes[0]) && arr[0].contains(techniques_attributes[2])){
+                else if (arr[0].contains(techniques_attributes[0]) && arr[0].contains(techniques_attributes[2])){
                     int index = getNumberFromLine(arr[0]);
                     techniques.get(index).setType(arr[1]);
                 }
-                if (arr[0].contains(techniques_attributes[0]) && arr[0].contains(techniques_attributes[3])){
+                else if (arr[0].contains(techniques_attributes[0]) && arr[0].contains(techniques_attributes[3])){
                     int index = getNumberFromLine(arr[0]);
                     techniques.get(index).setOwner(arr[1]);
                 }
-                if (arr[0].contains(techniques_attributes[0]) && arr[0].contains(techniques_attributes[4])){
+                else if (arr[0].contains(techniques_attributes[0]) && arr[0].contains(techniques_attributes[4])){
                     int index = getNumberFromLine(arr[0]);
                     techniques.get(index).setDamage(getNumberFromLine(arr[1]));
+                }
+                
+                //extras
+                else{
+                    mission.addExtra(arr[0], arr[1]);
                 }
             }
             br.close();

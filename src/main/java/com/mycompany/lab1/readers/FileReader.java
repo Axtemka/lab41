@@ -11,5 +11,5 @@ import com.mycompany.lab1.data.Mission;
  * @author temdo
  */
 abstract public class FileReader {    
-    abstract Mission getMissionInfo(String path);
+    public abstract Mission getMissionInfo(String path);
 }

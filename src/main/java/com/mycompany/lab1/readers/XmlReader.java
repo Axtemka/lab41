@@ -23,6 +23,11 @@ public class XmlReader extends FileReader{
             JAXBContext context = JAXBContext.newInstance(Mission.class);
             Unmarshaller unmar = context.createUnmarshaller();
             mission = (Mission) unmar.unmarshal(new File(path));
+            
+            if (mission != null) {
+                mission.fillExtras(); 
+            }
+            
             return mission;
         } catch (JAXBException ex) {
             System.getLogger(XmlReader.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);

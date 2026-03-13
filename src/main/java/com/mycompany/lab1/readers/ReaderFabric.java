@@ -4,20 +4,21 @@
  */
 package com.mycompany.lab1.readers;
 
+
 /**
  *
  * @author temdo
  */
 public class ReaderFabric {
-    public JsonReader createJsonReader(){
+    public FileReader createJsonReader(){
         return new JsonReader();
     }
     
-    public TextReader createTextReader(){
+    public FileReader createTextReader(){
         return new TextReader();
     }
     
-    public XmlReader createXmlReader(){
+    public FileReader createXmlReader(){
         return new XmlReader();
     }
 }

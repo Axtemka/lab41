@@ -4,13 +4,19 @@
  */
 package com.mycompany.lab1.data;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.w3c.dom.Element;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAnyElement;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +47,18 @@ public class Mission {
     @XmlElement(name = "technique")
     private List<Technique> techniques;
     
+    
+//    @XmlElements({
+//        @XmlElement(name = "note", type = Object.class),
+//        @XmlElement(name = "comment", type = Object.class),
+//        @XmlElement(name = "message", type = Object.class)
+//    })
+    
+    @XmlAnyElement // JAXB положит сюда все теги, которых нет выше (note, comment, message и др.)
+    @JsonIgnore    // Jackson не должен сериализовать этот служебный список
+    private List<Element> rawElements = new ArrayList<>();
+    
+    @XmlAnyElement
     private Map<String, Object> extras = new HashMap<>();
     
     public Mission(){}
@@ -56,7 +74,11 @@ public class Mission {
         this.techniques = techniques;
     }
     
-    
+    public void fillExtras() {
+        for (Element el : rawElements) {
+            this.extras.put(el.getLocalName(), el.getTextContent());
+        }
+    }
 
     public String getMissionId() {
         return missionId;
@@ -122,6 +144,7 @@ public class Mission {
         this.techniques = techniques;
     }
     
+    @JsonAnyGetter
     public Map<String, Object> getExtras() {
         return extras;
     }
